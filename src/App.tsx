@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {HotelCardList} from './components/HotelCardList';
 import {SearchBar} from './components/SearchBar';
-import { CssBaseline, Container } from "@mui/material";
+import { CssBaseline, Container, Box } from "@mui/material";
 import ApiService from "./services/api.service";
 import HotelData from "./types/hotel.type"
 
 function App() {
 
   const [hotels, setHotels] = useState<HotelData[] | []>([]);
-  const [ratingValue, setRatingValue] = React.useState(5);
+  const [ratingValue, setRatingValue] = React.useState(3);
   const [adultsValue, setAdultsValue] = React.useState(1);
   const [childValue, setChildValue] = React.useState(0);
 
@@ -17,7 +17,6 @@ function App() {
       .then((response: any) => {
         const allHotels = response.data;
         setHotels(allHotels);
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -37,7 +36,6 @@ function App() {
   }
 
   React.useEffect( () => {
-      console.log('First Render');
       retrieveHotels();
   }, []);
 
@@ -45,6 +43,9 @@ function App() {
     <>
       <CssBaseline />
       <Container>
+        <Box sx={{ m: 1 , p: 1}} >
+          <img key={'banner-header'} src={'https://cutt.ly/pKW96DM'} style={{maxWidth: '100%', maxHeight: '100%'}} />
+        </Box>
         <SearchBar
           currentRating={ratingValue}
           currentAdults={adultsValue}
@@ -52,7 +53,7 @@ function App() {
           updateRatingValue={updateRatingValue}
           updateAdultsValue={updateAdultsValue}
           updateChildValue={updateChildValue}
-          />
+        />
         <HotelCardList hotels={hotels} currentRating={ratingValue} currentAdults={adultsValue} currentChild={childValue}/>
       </Container>
     </>

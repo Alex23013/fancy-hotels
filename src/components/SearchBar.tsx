@@ -11,10 +11,20 @@ interface Props {
     updateChildValue: (arg: number) => void;
 }
 
+const styleSearchBar = {
+    position: 'absolute' as 'absolute',
+    border: '1px solid #AFB1B1',
+    backgroundColor: 'white',
+    zIndex:1,
+    width: '50%',
+    marginTop: '-3%',
+    marginLeft: '12%'
+  };
+
 export const SearchBar: React.FC<Props> = ({ currentRating, currentAdults, currentChild, updateRatingValue, updateAdultsValue, updateChildValue }) => {
 
     return (
-        <Box width={"50%"} sx={{border: '1px solid #AFB1B1',}} ml={"25%"}>
+        <Box sx={styleSearchBar}>
             <Grid
                 container
                 direction="row"
